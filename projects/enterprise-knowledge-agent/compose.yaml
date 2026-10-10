@@ -1,0 +1,61 @@
+services:
+  api:
+    build:
+      context: .
+    environment:
+      DATABASE_URL: postgresql+psycopg://agent:agent@postgres:5432/knowledge_agent
+      QDRANT_URL: http://qdrant:6333
+      QDRANT_COLLECTION: knowledge_chunks
+      EMBEDDING_PROVIDER: deterministic
+      LLM_PROVIDER: deterministic
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-5.5}
+      EVIDENCE_THRESHOLD: "0.30"
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      qdrant:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=3)"
+      interval: 5s
+      timeout: 4s
+      retries: 12
+
+  qdrant:
+    image: qdrant/qdrant:v1.15.5
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c '</dev/tcp/127.0.0.1/6333'"]
+      interval: 5s
+      timeout: 4s
+      retries: 12
+
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: knowledge_agent
+      POSTGRES_USER: agent
+      POSTGRES_PASSWORD: agent
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agent -d knowledge_agent"]
+      interval: 5s
+      timeout: 4s
+      retries: 12
+
+volumes:
+  postgres_data:
+  qdrant_data:
+
