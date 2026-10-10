@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     database_url: str = "sqlite:///./knowledge_agent.db"
     qdrant_url: str = ":memory:"
     qdrant_collection: str = "knowledge_chunks"
+    embedding_provider: str = "deterministic"
     embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
     llm_provider: str = "deterministic"
     openai_api_key: str | None = None
