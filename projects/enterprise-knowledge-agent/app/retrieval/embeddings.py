@@ -42,4 +42,3 @@ class FastEmbedEmbeddingProvider:
 
     def embed(self, texts: list[str]) -> list[list[float]]:
         return [vector.tolist() for vector in self._model.embed(texts)]
-

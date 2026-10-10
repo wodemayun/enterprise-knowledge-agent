@@ -56,4 +56,3 @@ def build_container(settings: Settings | None = None) -> AppContainer:
         llm=llm,
         session_factory=session_factory,
     )
-

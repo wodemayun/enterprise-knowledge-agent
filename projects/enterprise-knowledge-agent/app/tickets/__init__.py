@@ -1,2 +1,1 @@
 """Human escalation ticket persistence."""
-

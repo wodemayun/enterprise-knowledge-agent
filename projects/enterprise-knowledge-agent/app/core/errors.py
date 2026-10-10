@@ -16,4 +16,3 @@ class ConfigurationError(DomainError):
 
 class DependencyUnavailableError(DomainError):
     """Raised when a required database or external service is unavailable."""
-

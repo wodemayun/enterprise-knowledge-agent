@@ -16,7 +16,6 @@ from app.api.schemas import (
 from app.runs.repository import SqlAlchemyRunRepository
 from app.tickets.repository import SqlAlchemyTicketRepository
 
-
 router = APIRouter()
 
 
@@ -114,4 +113,3 @@ def get_ticket(request: Request, ticket_id: int) -> TicketResponse:
             reason=ticket.reason,
             status=ticket.status,
         )
-

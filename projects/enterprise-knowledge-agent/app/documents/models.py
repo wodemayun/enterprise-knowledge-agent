@@ -12,4 +12,3 @@ class IngestionResult:
     document_id: str
     source_name: str
     chunk_count: int
-

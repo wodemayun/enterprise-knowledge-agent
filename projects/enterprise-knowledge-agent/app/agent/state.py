@@ -14,4 +14,3 @@ class AgentState(TypedDict, total=False):
     status: str
     ticket_id: int | None
     started_at: float
-

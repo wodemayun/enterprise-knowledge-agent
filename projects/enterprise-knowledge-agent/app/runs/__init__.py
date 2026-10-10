@@ -1,2 +1,1 @@
 """Agent execution audit records."""
-

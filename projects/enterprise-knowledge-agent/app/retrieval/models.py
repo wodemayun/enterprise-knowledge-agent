@@ -9,4 +9,3 @@ class RetrievedChunk:
     chunk_index: int
     text: str
     score: float
-

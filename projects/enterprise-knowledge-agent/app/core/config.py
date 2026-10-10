@@ -17,7 +17,7 @@ class Settings(BaseSettings):
     llm_provider: str = "deterministic"
     openai_api_key: str | None = None
     openai_model: str = "gpt-5.5"
-    evidence_threshold: float = Field(default=0.72, ge=0.0, le=1.0)
+    evidence_threshold: float = Field(default=0.3, ge=0.0, le=1.0)
     retrieval_limit: int = Field(default=4, ge=1, le=20)
     chunk_size: int = Field(default=700, ge=100)
     chunk_overlap: int = Field(default=100, ge=0)

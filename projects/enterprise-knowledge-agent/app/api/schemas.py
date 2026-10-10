@@ -2,7 +2,6 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
-
 TenantId = str
 
 
@@ -43,4 +42,3 @@ class HealthResponse(BaseModel):
     status: Literal["ok", "degraded"]
     database: Literal["ok", "unavailable"]
     vector_store: Literal["ok", "unavailable"]
-

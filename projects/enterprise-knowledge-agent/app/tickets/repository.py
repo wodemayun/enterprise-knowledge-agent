@@ -15,4 +15,3 @@ class SqlAlchemyTicketRepository:
 
     def get(self, ticket_id: int) -> Ticket | None:
         return self._session.get(Ticket, ticket_id)
-
